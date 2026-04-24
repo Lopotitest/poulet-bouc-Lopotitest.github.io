@@ -6,6 +6,9 @@
     <title>Poulet Express | L'Excellence de la Volaille</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         /* Couleurs : Noir: #121212 | Vert: #1b4332 | Rouge: #c1121f | Orange: #fb8500 */
         :root {
             --dark: #121212;
@@ -160,8 +163,8 @@
         <img src="Logo 2.png" alt="Logo" style="height: 100px;">
         <ul>
             <li><a href="#">Accueil</a></li>
-            <li><a href="#">Nos Produits</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#nos-produits">Nos Produits</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -174,7 +177,7 @@
         </div>
     </section>
 
-    <section class="products">
+    <section id="nos-produits" class="products">
         <h2 class="section-title">Nos Produits Phare</h2>
         <div class="grid">
             <div class="card">
@@ -202,7 +205,14 @@
             </div>
         </div>
     </section>
-
+    
+    <section id="contact" style="padding: 80px 10%; text-align: center; background: #f4f4f4;">
+        <h2 class="section-title">Contactez-nous</h2>
+        <p>📍 Cowansville, Québec</p>
+        <p>📞 579 420 3039</p>
+        <p>📧 saveur.boucane@hotmail.com</p>
+    </section>
+    
     <footer>
         <p>&copy; 2026 Poulet Express - Qualité Garantie</p>
     </footer>
