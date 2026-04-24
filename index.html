@@ -132,6 +132,14 @@
             transition: 0.3s;
         }
 
+        .product-img {
+            width: 100%;       /* L'image prend toute la largeur de la carte */
+            height: 200px;     /* On fixe une hauteur commune */
+            object-fit: cover; /* On coupe l'image proprement pour qu'elle remplisse l'espace */
+            border-radius: 10px; /* Des bords arrondis pour le côté moderne */
+            margin-bottom: 15px;
+        }
+
         .card:hover { border-bottom-color: var(--red); }
 
         .card h3 { color: var(--dark); }
