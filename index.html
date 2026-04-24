@@ -138,6 +138,7 @@
             border-radius: 15px;
             border-bottom: 5px solid var(--green);
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .product-img {
@@ -160,6 +161,50 @@
             text-align: center;
             border-top: 4px solid var(--orange);
         }
+        /* Style de la fenêtre modale */
+        .modal {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8); /* Fond noir transparent */
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: zoomIn 0.3s;
+        }
+        
+        @keyframes zoomIn {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .modal-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
     </style>
 </head>
 <body>
@@ -219,9 +264,46 @@
         <p>📧 saveur.boucane@hotmail.com</p>
     </section>
     
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2026 Poulet Express - Qualité Garantie</p>
     </footer>
+    
+    <script>
+        const modal = document.getElementById("productModal");
+        const closeBtn = document.querySelector(".close-btn");
+        
+        // On ajoute l'événement clic sur TOUTES les cartes
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('h3').innerText;
+                const price = card.querySelector('.price').innerText;
+                const imgSrc = card.querySelector('img').src;
+                
+                // On remplit la modale avec les infos de la carte
+                document.getElementById("modalBody").innerHTML = `
+                <img src="${imgSrc}" class="modal-img">
+                <h2 style="color:var(--green)">${title}</h2>
+                <p style="font-weight:bold; color:var(--red); font-size:1.5rem;">${price}</p>
+                <p>Ici, vous pouvez ajouter une description beaucoup plus longue, parler de l'origine du poulet, de la cuisson recommandée, et ajouter un bouton de paiement.</p>
+                <button class="btn btn-orange" style="width:100%; border:none;">Ajouter au panier</button>
+                `;
+                
+                modal.style.display = "block";
+            });
+        });
+        
+        // Fermer quand on clique sur le X ou à côté de la fenêtre
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+    </script>
 
 </body>
 </html>
