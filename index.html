@@ -1,1 +1,195 @@
-<h1>Bienvenue sur mon site</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poulet Express | L'Excellence de la Volaille</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Couleurs : Noir: #121212 | Vert: #1b4332 | Rouge: #c1121f | Orange: #fb8500 */
+        :root {
+            --dark: #121212;
+            --green: #1b4332;
+            --red: #c1121f;
+            --orange: #fb8500;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--white);
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--dark);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--green); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--orange); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 60%, var(--green));
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 10%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn-orange { background-color: var(--orange); color: var(--white); }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        /* Produits */
+        .products { padding: 80px 10% text-align: center; }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--red);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            border-bottom: 5px solid var(--green);
+            transition: 0.3s;
+        }
+
+        .card:hover { border-bottom-color: var(--red); }
+
+        .card h3 { color: var(--dark); }
+        .price { color: var(--red); font-weight: 700; font-size: 1.2rem; }
+
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px;
+            text-align: center;
+            border-top: 4px solid var(--orange);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Poulet<span>Express</span></div>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Nos Produits</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Le Goût Authentique,<br><span style="color:var(--orange)">L'Excellence Fermière.</span></h1>
+            <p>Découvrez notre sélection de poulets élevés en plein air, livrés directement chez vous.</p>
+            <a href="#" class="btn btn-orange">Commander Maintenant</a>
+            <a href="#" class="btn btn-outline">Voir la Carte</a>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2 class="section-title">Nos Produits Phare</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Poulet Entier Fermier</h3>
+                <p>Le classique, tendre et juteux pour vos repas de famille.</p>
+                <p class="price">12,90 €</p>
+            </div>
+            <div class="card">
+                <h3>Ailes BBQ Épicées</h3>
+                <p>Mariné dans notre sauce secrète rouge et verte.</p>
+                <p class="price">8,50 €</p>
+            </div>
+            <div class="card" style="border-bottom-color: var(--orange);">
+                <h3>Filets de Poulet</h3>
+                <p>La finesse pour vos préparations healthy et rapides.</p>
+                <p class="price">10,00 €</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Poulet Express - Qualité Garantie</p>
+    </footer>
+
+</body>
+</html>
