@@ -27,13 +27,16 @@
 
         /* Navigation */
         nav {
-            background-color: var(--dark);
+            background-color: rgba(18, 18, 18, 0.8); /* Le 0.8 ajoute de la transparence */
+            backdrop-filter: blur(10px);            /* Effet de flou moderne sur l'image derrière */
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
+            position: fixed;   /* Elle reste en haut mais "flotte" au-dessus */
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
         }
 
