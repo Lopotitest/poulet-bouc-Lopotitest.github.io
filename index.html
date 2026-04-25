@@ -308,6 +308,25 @@
         closeBtn.onclick = () => modal.style.display = "none";
         window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
     </script>
-
+    
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150; // Distance avant que l'élément n'apparaisse
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        
+        // On écoute l'événement de défilement
+        window.addEventListener("scroll", reveal);
+        // On lance la fonction une fois au chargement pour les éléments déjà visibles
+        reveal();
+    </script>
 </body>
 </html>
