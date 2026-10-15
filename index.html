@@ -507,7 +507,7 @@
     </footer>
     
     <script>
-        // SCRIPT DE LA MODALE ET CLOVER
+        // SCRIPT DE LA MODALE ET CLOVER MIS À JOUR POUR MULTIPLES PRIX AU KG
         const modalElement = document.getElementById("productModal");
         const modalBody = document.getElementById("modalBody");
         const closeBtn = document.querySelector(".close-btn");
@@ -515,34 +515,41 @@
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('h3').innerText;
-                const price = card.querySelector('.price').innerText;
+                const priceText = card.querySelector('.price').innerText;
                 const imgSrc = card.querySelector('img').src;
                 const cloverLink = card.getAttribute('data-link');
 
                 let modalHTML = `
                     <img src="${imgSrc}" class="modal-img">
                     <h2 style="color:var(--green); margin-bottom:5px;">${title}</h2>
-                    <p style="font-weight:bold; color:var(--red); font-size:1.4rem; margin-bottom:15px;">${price}</p>
+                    <p style="font-weight:bold; color:var(--red); font-size:1.4rem; margin-bottom:15px;">${priceText}</p>
                     <p style="margin-bottom:20px;">Savourez notre spécialité boucanée, préparée selon la tradition pour un goût fumé inimitable.</p>
                 `;
         
-                // Vérifie si c'est un produit au kilo
-                if (price.includes("/kg")) {
+                // Vérifie si c'est un produit au kilo (ex: "36$/kg", "33cadkg", etc.)
+                if (priceText.toLowerCase().includes("kg") || priceText.toLowerCase().includes("cadkg")) {
+                    // Extrait uniquement les chiffres du prix (ex: 36, 33, 45, 64)
+                    const numericPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
+                    
+                    // Calcule automatiquement les prix pour 0.5kg et 1kg
+                    const priceHalfKg = Math.round(numericPrice / 2);
+                    const priceFullKg = numericPrice;
+
                     modalHTML += `
                         <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir le poids :</p>
                         <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <a href="https://link.clover.com/urlshortener/Xs5yYY" target="_blank" class="btn btn-orange" 
+                            <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
                                style="text-decoration:none; padding: 10px 15px; font-size: 0.85rem; border:none; flex: 1; min-width: 120px; text-align:center;">
-                               Env. 0.5kg (18$)
+                               Env. 0.5kg (${priceHalfKg}$)
                             </a>
-                            <a href="https://link.clover.com/urlshortener/dnkzjg" target="_blank" class="btn btn-orange" 
+                            <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
                                style="text-decoration:none; padding: 10px 15px; font-size: 0.85rem; border:none; flex: 1; min-width: 120px; text-align:center;">
-                               Env. 1kg (36$)
+                               Env. 1kg (${priceFullKg}$)
                             </a>
                         </div>
                     `;
                 } else {
-                    // Bouton normal pour les prix fixes (Assiettes, cuisses)
+                    // Bouton normal pour les prix fixes (ex: assiettes, cuisses à prix fixe)
                     modalHTML += `
                         <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
                            style="display:block; text-align:center; text-decoration:none; width:80%; border:none; margin:0 auto;">
