@@ -30,7 +30,7 @@
             padding: 0;
             background-color: var(--white);
             color: var(--dark);
-            overflow-x: hidden; /* EMPÊCHE LE DÉBORDEMENT À DROITE */
+            overflow-x: hidden;
             width: 100vw;
         }
 
@@ -69,7 +69,7 @@
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://github.com/Lopotitest/poulet-bouc-Lopotitest.github.io/blob/main/couchersoleil.jpg?raw=true');
             background-size: cover;
             background-position: top;
-            background-attachment: fixed; /* Petit effet parallaxe */
+            background-attachment: fixed;
             height: 80vh;
             display: flex;
             align-items: center;
@@ -133,7 +133,6 @@
         
         .grid {
             display: grid;
-            /* 2 colonnes sur mobile (150px) et s'adapte sur grand écran */
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
             gap: 15px; 
             margin-top: 30px;
@@ -152,7 +151,6 @@
             text-align: left;
         }
         
-        /* Effet de soulèvement et changement de couleur au survol */
         .card:hover { 
             border-bottom-color: var(--red); 
             transform: translateY(-5px);
@@ -184,7 +182,7 @@
             color: var(--red); 
             font-weight: 700; 
             font-size: 1.1rem; 
-            margin-top: auto; /* Pousse le prix en bas de la carte */
+            margin-top: auto;
         }
 
         /* SCROLL REVEAL CSS */
@@ -246,6 +244,82 @@
             margin-bottom: 20px;
         }
 
+        /* Styles pour les formulaires */
+        .custom-form {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .form-group-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .form-group-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .custom-form label {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        .custom-form input, 
+        .custom-form textarea,
+        .custom-form select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+        .custom-form input:focus, 
+        .custom-form textarea:focus,
+        .custom-form select:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        .product-selection-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f0f0;
+        }
+
+        .checkbox-item select, .checkbox-item input[type="number"] {
+            margin-left: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 4px 8px;
+        }
+
         footer {
             background: var(--dark);
             color: var(--white);
@@ -262,6 +336,8 @@
         <ul>
             <li><a href="#">Accueil</a></li>
             <li><a href="#nos-produits">Nos Produits</a></li>
+            <li><a href="#commande-normale">Commander</a></li>
+            <li><a href="#commande-speciale">Commandes Spéciales</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -269,115 +345,114 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Le Goût Authentique,<br><span style="color:var(--orange)">Une explosion de saveurs</span></h1>
-            <p>Découvrez notre sélection de poulet et de côtes levées au goût authentique des iles</p>
+            <p>Découvrez notre sélection de poulet et de côtes levées au goût authentique des îles.</p>
             <a href="#notre-entreprise" class="btn btn-orange">Notre entreprise</a>
             <a href="#nos-produits" class="btn btn-outline">Voir la carte</a>
         </div>
     </section>
-    
+
     <!-- SECTION : NOTRE ENTREPRISE -->
     <section id="notre-entreprise" class="reveal" style="padding: 60px 5%; max-width: 900px; margin: 0 auto; text-align: center;">
         <h2 class="section-title">Notre entreprise</h2>
         <p style="font-size: 1.05rem; line-height: 1.6; color: #444; margin-bottom: 20px;">
-            Bienvenue chez <strong>Saveur Boucane</strong>, une entreprise créé pour tous les amateurs de bonne cuisine qui souhaitent découvrir des saveurs différentes, exotiques et mémorables au Québec, Canada.
+            Bienvenue chez <strong>Saveur Boucane</strong>, une entreprise créée pour tous les amateurs de bonne cuisine qui souhaitent découvrir des saveurs différentes, exotiques et mémorables au Québec, Canada.
         </p>
         <p style="font-size: 1.05rem; line-height: 1.6; color: #444;">
-            En tant que traiteur local, notre mission est de vous faire voyager grâce au gout authentique des Caraibes, tout en prenant soin de votre santé. Nous cuisinons les recettes traditionnelles antillaises en utilisant des ingredients frais, sains et locaux.
+            En tant que traiteur local, notre mission est de vous faire voyager grâce au goût authentique des Caraïbes, tout en prenant soin de votre santé. Nous cuisinons les recettes traditionnelles antillaises en utilisant des ingrédients frais, sains et locaux.
         </p>
     </section>
-    
-    <!-- SECTION : En service traiteur -->
+
+    <!-- SECTION : SERVICE TRAITEUR -->
     <section id="nos-produits" class="products">
         <h2 class="section-title reveal">En service traiteur</h2>
         <div class="grid">
-            <div class="card reveal" data-link="LIEN_CLOVER_ICI">
+            <div class="card reveal" data-item="accras">
                 <img src="accras.png" alt="Accras" class="product-img">
                 <h3>6 accras de morue ou de légumes</h3>
-                <p>L'apéritif incontournable de la cuisine antillaise </p>
+                <p>L'apéritif incontournable de la cuisine antillaise.</p>
                 <p class="price">10$</p>
             </div>
-            <div class="card reveal" data-link="LIEN_CLOVER_ICI">
+            <div class="card reveal" data-item="assiette">
                 <img src="Assiette.jpg" alt="Assiette" class="product-img">
                 <h3>Assiette complète</h3>
-                <p>Une assiette composée de riz, salade, et de, au choix : 5 côtes levées ou une cuisse de poulet accompagnée de la sauce chien. Une recette authentique de la Martinique où tous les goût sont présents, le citron vert, l'ail, et la boucane de canne à sucre et érable. 
+                <p>Riz, salade et au choix : 5 côtes levées ou une cuisse de poulet avec sauce chien.</p>
                 <p class="price">18$</p>
             </div>
-            <div class="card reveal" data-link="LIEN_CLOVER_ICI">
+            <div class="card reveal" data-item="flan">
                 <img src="flancoco.jpg" alt="Flan" class="product-img">
                 <h3>Flan au coco au sirop d'érable</h3>
-                <p>La cloture sucrée de notre escapasde gourmande.</p>
+                <p>La clôture sucrée de notre escapade gourmande.</p>
                 <p class="price">3 pour 10$</p>
             </div>
-            <div class="card reveal" data-link="LIEN_CLOVER_ICI">
+            <div class="card reveal" data-item="menu">
                 <img src="fullmenu2.jpg" alt="Menu" class="product-img">
                 <h3>Menu (entrée, plat, dessert)</h3>
-                <p>L'experience unique complète pour un voyage gustatif aux antilles.</p>
+                <p>L'expérience unique complète pour un voyage gustatif aux Antilles.</p>
                 <p class="price">25$</p>
             </div>
         </div>
     </section>
-    
+
+    <!-- SECTION : SOUS-VIDE CONGELÉS -->
     <section id="sous-vide" class="products">
         <h2 class="section-title reveal">Prêts à manger congelés sous vide</h2>
         <div class="grid">
-            <div class="card reveal" data-link="https://link.clover.com/urlshortener/Xs5yYY">
+            <div class="card reveal" data-item="poulet">
                 <img src="pouletvide.jpg" alt="Poulet" class="product-img">
                 <h3>Le poulet boucané</h3>
                 <p>Le classique, tendre et juteux pour vos repas de famille.</p>
                 <p class="price">33$/kg</p>
             </div>
-            <div class="card reveal" data-link="https://link.clover.com/urlshortener/F8zhg2">
+            <div class="card reveal" data-item="cuisses">
                 <img src="cuissevide.jpg" alt="3 cuisses de poulet" class="product-img">
                 <h3>Cuisses, ailes de poulet</h3>
-                <p>Le même gout, en plus petit format.</p>
+                <p>Le même goût, en plus petit format.</p>
                 <p class="price">36$/kg</p>
             </div>
-            <div class="card reveal" data-link="Lien clover ici">
+            <div class="card reveal" data-item="poitrine">
                 <img src="poitrinevide.jpg" alt="Poitrine" class="product-img">
                 <h3>Poitrine de poulet Boucanée</h3>
-                <p>Le même gout, pour les amateurs de poitrine.</p>
+                <p>Le même goût, pour les amateurs de poitrine.</p>
                 <p class="price">45$/kg</p>
             </div>
-            <div class="card reveal" data-link="https://link.clover.com/urlshortener/htWwFC">
+            <div class="card reveal" data-item="cotes">
                 <img src="ribsvide.jpg" alt="Ribs" class="product-img">
                 <h3>Côtes levées de porc boucanées</h3>
                 <p>Une viande fondante avec une richesse en saveurs.</p>
                 <p class="price">36$/kg</p>
             </div>
-            <div class="card reveal" data-link="lien clover">
+            <div class="card reveal" data-item="agneau">
                 <img src="agneauvide.jpg" alt="Agneau" class="product-img">
-                <h3>Agneau boucané<h3>
-                <p>Une viande tendre qui garde son caractère</p>
+                <h3>Agneau boucané</h3>
+                <p>Une viande tendre qui garde son caractère.</p>
                 <p class="price">64$/kg</p>
             </div>
-           
         </div>
     </section>
 
-
-
+    <!-- SECTION : INFORMATIONS DE RETRAIT -->
     <section class="info-section">
         <h2>Comment récupérer vos commandes ?</h2>
         <div class="steps-container">
             <div class="step">
                 <div class="step-number">1</div>
-                <h3>Confirmation</h3>
-                <p>Une fois votre paiement validé, vous recevrez un email de confirmation</p>
+                <h3>Réservation</h3>
+                <p>Passez votre commande via notre formulaire en choisissant vos articles et votre point de retrait.</p>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
-                <h3>Préparation</h3>
-                <p>Notre cuisiner préparera votre commande avec soin.</p>
+                <h3>Confirmation</h3>
+                <p>Vous recevrez un courriel récapitulatif validant la prise en charge de votre commande.</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
-                <h3>Retrait</h3>
-                <p>Présentez-vous au point de collecte ou à nos dates de marché avec votre reçu pour recevoir votre commande.</p>
+                <h3>Préparation</h3>
+                <p>Notre cuisinier préparera votre commande avec soin selon la tradition.</p>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
-                <h3>Point de retrait</h3>
-                <p>Il y aura un point de collecte chaque 2<sup>ème</sup> et 4<sup>ème</sup> samedi matin du mois (sauf jour de marché) à la cuisine de l'école secondaire Massey-Vanier.</p>
+                <h3>Retrait & Paiement</h3>
+                <p>Récupérez votre commande au point de collecte choisi et payez sur place à la réception (Comptant/Interac).</p>
             </div>
         </div>
     </section>
@@ -387,71 +462,179 @@
         <div class="dates-list">
             <div class="date-item">
                 <span class="date-calendar">À venir ...</span>
-                <span class="date-text"></span>
+                <span class="date-text">Point de collecte : 2<sup>ème</sup> et 4<sup>ème</sup> samedi du mois à l'école Massey-Vanier.</span>
             </div>
         </div>
     </section>
-    
-    <!-- Style CSS pour rendre ça beau -->
-    <style>
-        .info-section {
-            font-family: sans-serif;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        h2 {
-            color: #2d3436;
-            border-bottom: 2px solid #0984e3;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-        .steps-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .step {
-            flex: 1;
-            min-width: 250px;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .step-number {
-            background: #0984e3;
-            color: white;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .dates-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .date-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: white;
-            border-left: 5px solid #0984e3;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .date-calendar {
-            font-weight: bold;
-            color: #0984e3;
-            margin-right: 20px;
-            min-width: 80px;
-        }
-    </style>
-    
+
+    <!-- FORMULAIRE N°1 : COMMANDE NORMALE -->
+    <section id="commande-normale" class="info-section reveal">
+        <h2>Passer une commande (Paiement à la récupération)</h2>
+        <p style="margin-bottom: 20px; color: #555;">Cochez vos articles, choisissez vos quantités et votre point de retrait. Vous payerez directement sur place lors de la prise de votre commande.</p>
+        
+        <!-- REMPLACEZ L'URL PAR VOTRE CODE FORMSPREE N°1 -->
+        <form action="https://formspree.io/f/VOTRE_CODE_FORMSPREE_1" method="POST" class="custom-form">
+            <input type="hidden" name="_subject" value="Nouvelle Commande Normale - Saveur Boucané">
+
+            <div class="form-group">
+                <label>Sélectionnez vos produits *</label>
+                <div class="product-selection-grid">
+                    <label class="checkbox-item" id="item-accras">
+                        <input type="checkbox" name="Produit[]" value="6 accras (10$)"> 
+                        <span><strong>6 accras de morue ou légumes</strong> (10$)</span>
+                        <input type="number" name="Qté_Accras" min="1" value="1" style="width: 70px;">
+                    </label>
+
+                    <label class="checkbox-item" id="item-assiette">
+                        <input type="checkbox" name="Produit[]" value="Assiette complète (18$)"> 
+                        <span><strong>Assiette complète</strong> (18$)</span>
+                        <input type="number" name="Qté_Assiette" min="1" value="1" style="width: 70px;">
+                    </label>
+
+                    <label class="checkbox-item" id="item-flan">
+                        <input type="checkbox" name="Produit[]" value="Flan au coco (3 pour 10$)"> 
+                        <span><strong>Flan au coco</strong> (3 pour 10$)</span>
+                        <input type="number" name="Qté_Flan" min="1" value="1" style="width: 70px;">
+                    </label>
+
+                    <label class="checkbox-item" id="item-menu">
+                        <input type="checkbox" name="Produit[]" value="Menu complet (25$)"> 
+                        <span><strong>Menu (entrée, plat, dessert)</strong> (25$)</span>
+                        <input type="number" name="Qté_Menu" min="1" value="1" style="width: 70px;">
+                    </label>
+
+                    <label class="checkbox-item" id="item-poulet">
+                        <input type="checkbox" name="Produit[]" value="Poulet boucané (33$/kg)"> 
+                        <span><strong>Poulet boucané congelé</strong> (33$/kg)</span>
+                        <select name="Poids_Poulet">
+                            <option value="Env. 0.5kg (~17$)">Env. 0.5 kg (~17$)</option>
+                            <option value="Env. 1kg (33$)" selected>Env. 1 kg (33$)</option>
+                        </select>
+                    </label>
+
+                    <label class="checkbox-item" id="item-cuisses">
+                        <input type="checkbox" name="Produit[]" value="Cuisses/Ailes (36$/kg)"> 
+                        <span><strong>Cuisses/Ailes de poulet</strong> (36$/kg)</span>
+                        <select name="Poids_Cuisses">
+                            <option value="Env. 0.5kg (18$)">Env. 0.5 kg (18$)</option>
+                            <option value="Env. 1kg (36$)" selected>Env. 1 kg (36$)</option>
+                        </select>
+                    </label>
+
+                    <label class="checkbox-item" id="item-poitrine">
+                        <input type="checkbox" name="Produit[]" value="Poitrine de poulet (45$/kg)"> 
+                        <span><strong>Poitrine de poulet boucanée</strong> (45$/kg)</span>
+                        <select name="Poids_Poitrine">
+                            <option value="Env. 0.5kg (~23$)">Env. 0.5 kg (~23$)</option>
+                            <option value="Env. 1kg (45$)" selected>Env. 1 kg (45$)</option>
+                        </select>
+                    </label>
+
+                    <label class="checkbox-item" id="item-cotes">
+                        <input type="checkbox" name="Produit[]" value="Côtes levées de porc (36$/kg)"> 
+                        <span><strong>Côtes levées de porc</strong> (36$/kg)</span>
+                        <select name="Poids_Cotes">
+                            <option value="Env. 0.5kg (18$)">Env. 0.5 kg (18$)</option>
+                            <option value="Env. 1kg (36$)" selected>Env. 1 kg (36$)</option>
+                        </select>
+                    </label>
+
+                    <label class="checkbox-item" id="item-agneau">
+                        <input type="checkbox" name="Produit[]" value="Agneau boucané (64$/kg)"> 
+                        <span><strong>Agneau boucané</strong> (64$/kg)</span>
+                        <select name="Poids_Agneau">
+                            <option value="Env. 0.5kg (32$)">Env. 0.5 kg (32$)</option>
+                            <option value="Env. 1kg (64$)" selected>Env. 1 kg (64$)</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="nom-cmd">Nom complet *</label>
+                    <input type="text" id="nom-cmd" name="Nom" required placeholder="Votre nom et prénom">
+                </div>
+                <div class="form-group">
+                    <label for="tel-cmd">Téléphone *</label>
+                    <input type="tel" id="tel-cmd" name="Téléphone" required placeholder="579 000 0000">
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="email-cmd">Courriel *</label>
+                    <input type="email" id="email-cmd" name="_replyto" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="lieu-retrait">Point de retrait souhaité *</label>
+                    <select id="lieu-retrait" name="Lieu_Retrait" required>
+                        <option value="">-- Sélectionnez un point de collecte --</option>
+                        <option value="École Massey-Vanier (2e et 4e Samedi du mois)">École Massey-Vanier (2e et 4e Samedi du mois)</option>
+                        <option value="Marché de Sutton">Marché de Sutton (Selon les dates affichées)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes-cmd">Remarques ou précisions</label>
+                <textarea id="notes-cmd" name="Remarques" rows="2" placeholder="Précisez un horaire de passage ou une demande particulière..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-orange" style="width: 100%; border: none; cursor: pointer; font-size: 1.1rem; margin-top: 10px;">
+                Valider ma réservation (Paiement sur place)
+            </button>
+        </form>
+    </section>
+
+    <!-- FORMULAIRE N°2 : COMMANDE SPÉCIALE / TRAITEUR -->
+    <section id="commande-speciale" class="info-section reveal">
+        <h2>Demande de Commande Spéciale / Traiteur</h2>
+        <p style="margin-bottom: 20px; color: #555;">Vous organisez un événement, une fête de famille ou vous souhaitez une très grande quantité ? Remplissez ce formulaire et nous élaborerons votre menu sur-mesure.</p>
+        
+        <!-- REMPLACEZ L'URL PAR VOTRE CODE FORMSPREE N°2 -->
+        <form action="https://formspree.io/f/VOTRE_CODE_FORMSPREE_2" method="POST" class="custom-form">
+            <input type="hidden" name="_subject" value="Demande de Commande Spéciale - Saveur Boucané">
+
+            <div class="form-group">
+                <label for="nom-spec flex">Nom complet *</label>
+                <input type="text" id="nom-spec" name="Nom" required placeholder="Votre nom et prénom">
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="email-spec">Courriel *</label>
+                    <input type="email" id="email-spec" name="_replyto" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="tel-spec">Téléphone *</label>
+                    <input type="tel" id="tel-spec" name="Téléphone" required placeholder="579 000 0000">
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="date-spec">Date souhaitée pour l'événement *</label>
+                    <input type="date" id="date-spec" name="Date_Evenement" required>
+                </div>
+                <div class="form-group">
+                    <label for="nb-pers">Nombre de personnes (approx.)</label>
+                    <input type="number" id="nb-pers" name="Nombre_Personnes" placeholder="ex: 30">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="details-spec">Détails de votre demande *</label>
+                <textarea id="details-spec" name="Details_Evenement" rows="4" required placeholder="Décrivez votre projet : type de produits souhaités, lieu, besoins spécifiques, traiteur sur place, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-orange" style="width: 100%; border: none; cursor: pointer; font-size: 1rem; margin-top: 10px;">
+                Envoyer ma demande de devis
+            </button>
+        </form>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact" class="reveal" style="padding: 80px 10%; text-align: center; background: #f4f4f4;">
         <h2 class="section-title">Contactez-nous</h2>
         <p>📍 Granby, Québec, Canada</p>
@@ -460,7 +643,7 @@
         <p>Suivez-nous sur <a href="https://www.facebook.com/p/Qui-veut-du-Poulet-Boucan%C3%A9-Qu%C3%A9bec-61578269652074/" target="_blank" rel="noopener noreferrer">Facebook</a></p>
     </section>
     
-    <!-- STRUCTURE DE LA MODALE -->
+    <!-- STRUCTURE DE LA MODALE PRODUIT -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -472,55 +655,50 @@
         <p>&copy; 2026 Saveur Boucané - Qualité Garantie</p>
     </footer>
     
+    <!-- SCRIPT JS INTERACTIF DE LA MODALE ET DES FORMULAIRES -->
     <script>
-        // SCRIPT DE LA MODALE ET CLOVER MIS À JOUR POUR MULTIPLES PRIX AU KG
         const modalElement = document.getElementById("productModal");
         const modalBody = document.getElementById("modalBody");
         const closeBtn = document.querySelector(".close-btn");
 
+        // GESTION DU CLIC SUR UN PRODUIT
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('h3').innerText;
                 const priceText = card.querySelector('.price').innerText;
                 const imgSrc = card.querySelector('img').src;
-                const cloverLink = card.getAttribute('data-link');
+                const itemKey = card.getAttribute('data-item');
 
                 let modalHTML = `
                     <img src="${imgSrc}" class="modal-img">
                     <h2 style="color:var(--green); margin-bottom:5px;">${title}</h2>
                     <p style="font-weight:bold; color:var(--red); font-size:1.4rem; margin-bottom:15px;">${priceText}</p>
-                    <p style="margin-bottom:20px;">Savourez notre spécialité boucanée, préparée selon la tradition pour un goût fumé inimitable.</p>
+                    <p style="margin-bottom:20px;">Savourez notre spécialité boucanée, préparée selon la tradition antillaise pour un goût fumé inimitable.</p>
                 `;
         
-                // Vérifie si c'est un produit au kilo (ex: "36$/kg", "33cadkg", etc.)
-                if (priceText.toLowerCase().includes("kg") || priceText.toLowerCase().includes("cadkg")) {
-                    // Extrait uniquement les chiffres du prix (ex: 36, 33, 45, 64)
+                if (priceText.toLowerCase().includes("kg")) {
                     const numericPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
-                    
-                    // Calcule automatiquement les prix pour 0.5kg et 1kg
                     const priceHalfKg = Math.round(numericPrice / 2);
-                    const priceFullKg = numericPrice;
 
                     modalHTML += `
-                        <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir le poids :</p>
+                        <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir votre option :</p>
                         <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
-                               style="text-decoration:none; padding: 10px 15px; font-size: 0.85rem; border:none; flex: 1; min-width: 120px; text-align:center;">
-                               Env. 0.5kg (${priceHalfKg}$)
-                            </a>
-                            <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
-                               style="text-decoration:none; padding: 10px 15px; font-size: 0.85rem; border:none; flex: 1; min-width: 120px; text-align:center;">
-                               Env. 1kg (${priceFullKg}$)
-                            </a>
+                            <button onclick="selectProductAndScroll('${itemKey}', '0.5kg')" class="btn btn-orange" 
+                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 120px;">
+                               Réserver env. 0.5kg (~${priceHalfKg}$)
+                            </button>
+                            <button onclick="selectProductAndScroll('${itemKey}', '1kg')" class="btn btn-orange" 
+                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 120px;">
+                               Réserver env. 1kg (${numericPrice}$)
+                            </button>
                         </div>
                     `;
                 } else {
-                    // Bouton normal pour les prix fixes (ex: assiettes, cuisses à prix fixe)
                     modalHTML += `
-                        <a href="${cloverLink}" target="_blank" class="btn btn-orange" 
-                           style="display:block; text-align:center; text-decoration:none; width:80%; border:none; margin:0 auto;">
-                           Acheter maintenant
-                        </a>
+                        <button onclick="selectProductAndScroll('${itemKey}', 'fixe')" class="btn btn-orange" 
+                           style="display:block; text-align:center; width:100%; border:none; margin:0 auto;">
+                           Réserver maintenant
+                        </button>
                     `;
                 }
         
@@ -529,13 +707,46 @@
             });
         });
 
-        // Fermeture de la modale
+        // FONCTION QUI FERME LA MODALE, DÉFILE ET PRE-SÉLECTIONNE DANS LE FORMULAIRE
+        function selectProductAndScroll(itemKey, weightOption) {
+            // 1. Fermer la modale
+            modalElement.style.display = "none";
+
+            // 2. Réinitialiser la couleur de fond des éléments
+            document.querySelectorAll('.checkbox-item').forEach(el => {
+                el.style.backgroundColor = 'transparent';
+            });
+
+            // 3. Trouver le produit correspondant
+            const targetItem = document.getElementById('item-' + itemKey);
+            if (targetItem) {
+                const checkbox = targetItem.querySelector('input[type="checkbox"]');
+                if (checkbox) checkbox.checked = true;
+
+                // Ajuster le poids si c'est un produit au kilo
+                const selectEl = targetItem.querySelector('select');
+                if (selectEl && weightOption === '0.5kg') {
+                    selectEl.selectedIndex = 0;
+                } else if (selectEl && weightOption === '1kg') {
+                    selectEl.selectedIndex = 1;
+                }
+
+                // Surligner la ligne du produit
+                targetItem.style.backgroundColor = '#ffe0b2';
+            }
+
+            // 4. Défiler jusqu'au formulaire
+            const formSection = document.getElementById('commande-normale');
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // FERMETURE DE LA MODALE
         closeBtn.onclick = () => modalElement.style.display = "none";
         window.onclick = (event) => { 
             if (event.target == modalElement) modalElement.style.display = "none"; 
         }
 
-        // SCRIPT SCROLL REVEAL
+        // ANIMATION DE DÉFILEMENT (SCROLL REVEAL)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -548,7 +759,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Lancement au démarrage
+        reveal();
     </script>
 </body>
 </html>
