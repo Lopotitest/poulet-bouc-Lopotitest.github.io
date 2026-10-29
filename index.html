@@ -640,12 +640,13 @@
     </footer>
     
     <!-- SCRIPT JS INTERACTIF DE LA MODALE ET DES FORMULAIRES -->
+    <!-- SCRIPT JS INTERACTIF COMPLET -->
     <script>
         const modalElement = document.getElementById("productModal");
         const modalBody = document.getElementById("modalBody");
         const closeBtn = document.querySelector(".close-btn");
 
-        // GESTION DU CLIC SUR UN PRODUIT DE LA GRILLE
+        // 1. GESTION DU CLIC SUR UN PRODUIT DE LA GRILLE
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('h3').innerText;
@@ -656,62 +657,65 @@
                 let modalHTML = `
                     <img src="${imgSrc}" class="modal-img">
                     <h2 style="color:var(--green); margin-bottom:5px;">${title}</h2>
-                    <p style="font-weight:bold; color:var(--red); font-size:1.4rem; margin-bottom:15px;">${priceText}</p>
-                    <p style="margin-bottom:20px;">Savourez notre spécialité boucanée, préparée selon la tradition antillaise pour un goût fumé inimitable.</p>
+                    <p style="font-weight:bold; color:var(--red); font-size:1.3rem; margin-bottom:5px;">${priceText}</p>
                 `;
-        
-                // Si c'est un produit au kilo, on affiche le choix des poids
+
+                // Si c'est un produit au kilo (articles sous-vide)
                 if (priceText.toLowerCase().includes("kg")) {
                     const numericPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
-                    const priceHalfKg = Math.round(numericPrice / 2);
+                    const avgPiecePrice = Math.round(numericPrice / 2); // Prix moyen estimé (~0.5kg/pièce)
 
                     modalHTML += `
-                        <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir votre option :</p>
+                        <p style="font-size:0.85rem; color:#666; margin-bottom:15px; line-height:1.4;">
+                            <em>Prix ajusté au poids exact lors de la réception (Prix moyen : environ ${avgPiecePrice} $ / pièce).</em>
+                        </p>
+                        <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir le nombre de pièces :</p>
                         <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <button onclick="selectProductAndScroll('${itemKey}', '0.5kg')" class="btn btn-orange" 
-                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 120px;">
-                               Réserver env. 0.5kg (~${priceHalfKg}$)
+                            <button onclick="selectProductAndScroll('${itemKey}', '1')" class="btn btn-orange" 
+                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
+                               Réserver 1 pièce (~${avgPiecePrice}$)
                             </button>
-                            <button onclick="selectProductAndScroll('${itemKey}', '1kg')" class="btn btn-orange" 
-                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 120px;">
-                               Réserver env. 1kg (${numericPrice}$)
+                            <button onclick="selectProductAndScroll('${itemKey}', '2')" class="btn btn-orange" 
+                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
+                               Réserver 2 pièces (~${avgPiecePrice * 2}$)
                             </button>
                         </div>
                     `;
                 } else {
-                    // Pour les produits du service traiteur (prix fixe) -> Redirige vers Commande Spéciale
+                    // Pour les produits Traiteur (prix fixe) -> Direction Commande Spéciale
                     modalHTML += `
-                        <button onclick="selectProductAndScroll('${itemKey}', 'fixe')" class="btn btn-orange" 
+                        <p style="margin-bottom:20px; font-size:0.9rem; color:#555;">Savourez notre spécialité boucanée, préparée selon la tradition antillaise (sur commande spéciale).</p>
+                        <button onclick="selectProductAndScroll('${itemKey}', '1')" class="btn btn-orange" 
                            style="display:block; text-align:center; width:100%; border:none; margin:0 auto;">
                            Réserver (Sur commande spéciale)
                         </button>
                     `;
                 }
-        
+
                 modalBody.innerHTML = modalHTML;
                 modalElement.style.display = "block";
             });
         });
 
-        // FONCTION OPTIMISÉE POUR GÉRER LA REDIRECTION SELON LE TYPE DE PRODUIT
-        function selectProductAndScroll(itemKey, weightOption) {
+        // 2. FONCTION POUR ROUTER L'UTILISATEUR ET PRÉ-SÉLECTIONNER LE PRODUIT/QUANTITÉ
+        function selectProductAndScroll(itemKey, pieceQty) {
+            // Fermer la modale
             modalElement.style.display = "none";
 
-            // Si le produit cliqué fait partie du service traiteur, on l'envoie direct au formulaire de Commande Spéciale
             const traiteurItems = ['accras', 'assiette', 'flan', 'menu'];
             
+            // Si c'est un produit traiteur -> Rediriger vers Commande Spéciale
             if (traiteurItems.includes(itemKey)) {
                 const specialForm = document.getElementById('commande-speciale');
                 if (specialForm) {
                     specialForm.scrollIntoView({ behavior: 'smooth' });
-                    // Optionnel : Pré-remplir le champ de message avec le nom du produit sélectionné
                     const detailsField = document.getElementById('details-spec');
                     if (detailsField) {
-                        detailsField.value = "Je souhaite commander : " + itemKey;
+                        detailsField.value = "Je souhaite commander l'option Traiteur : " + itemKey;
                     }
                 }
             } else {
-                // Sinon (produits sous vide au kg), on l'envoie vers le formulaire de Commande Normale
+                // Sinon (produit surgelé) -> Rediriger vers Commande Normale
                 document.querySelectorAll('.checkbox-item').forEach(el => el.style.backgroundColor = 'transparent');
                 
                 const targetItem = document.getElementById('item-' + itemKey);
@@ -719,13 +723,16 @@
                     const checkbox = targetItem.querySelector('input[type="checkbox"]');
                     if (checkbox) checkbox.checked = true;
 
+                    // Ajuster le nombre de pièces dans la liste déroulante
                     const selectEl = targetItem.querySelector('select');
                     if (selectEl) {
-                        if (weightOption === '0.5kg') selectEl.selectedIndex = 0;
-                        if (weightOption === '1kg') selectEl.selectedIndex = 1;
+                        const qtyIndex = parseInt(pieceQty) - 1;
+                        if (qtyIndex >= 0 && qtyIndex < selectEl.options.length) {
+                            selectEl.selectedIndex = qtyIndex;
+                        }
                     }
 
-                    // Surlignage visuel pour indiquer à l'utilisateur où le produit a été coché
+                    // Effet de surbrillance temporaire
                     targetItem.style.backgroundColor = '#ffe0b2';
                     setTimeout(() => {
                         targetItem.style.transition = 'background-color 1s ease';
@@ -740,13 +747,13 @@
             }
         }
 
-        // FERMETURE DE LA MODALE
+        // 3. FERMETURE DE LA MODALE
         closeBtn.onclick = () => modalElement.style.display = "none";
         window.onclick = (event) => { 
             if (event.target == modalElement) modalElement.style.display = "none"; 
         }
 
-        // ANIMATION DE DÉFILEMENT (SCROLL REVEAL)
+        // 4. ANIMATION SCROLL REVEAL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
