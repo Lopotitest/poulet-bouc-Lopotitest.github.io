@@ -433,7 +433,7 @@
 
     <!-- SECTION : INFORMATIONS DE RETRAIT -->
     <section class="info-section reveal">
-        <h2>Comment récupérer vos commandes ?</h2>
+        <h2 class="section-title reveal">Comment récupérer vos commandes ?</h2>
         <div class="steps-container">
             <div class="step" style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s;">
                 <div class="step-number" style="background: var(--orange); color: white; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; margin-bottom: 15px;">1</div>
@@ -459,12 +459,19 @@
     </section>
 
     <section class="info-section reveal">
-        <h2>Nos prochaines dates</h2>
+        <h2 class="section-title reveal">Nos prochaines dates</h2>
         <div style="background: #fdf8f5; border-left: 5px solid var(--orange); padding: 20px 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
             <p style="font-weight: 700; color: var(--dark); margin: 0 0 5px 0; font-size: 1.1rem;">📅 Calendrier à venir</p>
             <p style="color: #555; margin: 0; font-size: 0.95rem; line-height: 1.5;">
                 Point de collecte régulier : Chaque <strong>2<sup>ème</sup> et 4<sup>ème</sup> samedi du mois</strong> à la cuisine de l'école secondaire Massey-Vanier. Restez à l'affût pour nos dates de marchés !
             </p>
+            <div style="background: white; border-left: 5px solid var(--orange); padding: 15px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <span style="font-weight: 700; color: var(--red); font-size: 1.05rem;">📍 Marché de Sutton</span>
+                    <p style="margin: 3px 0 0 0; color: #555; font-size: 0.9rem;">De 9h00 à 14h00</p>
+                </div>
+                <span style="background: #fff3e0; color: var(--orange); font-weight: 700; padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">27 Juin</span>
+            </div>
         </div>
     </section>
 
@@ -480,30 +487,6 @@
             <div class="form-group">
                 <label>Sélectionnez vos produits *</label>
                 <div class="product-selection-grid">
-                    <label class="checkbox-item" id="item-accras">
-                        <input type="checkbox" name="Produit[]" value="6 accras (10$)"> 
-                        <span><strong>6 accras de morue ou légumes</strong> (10$)</span>
-                        <input type="number" name="Qté_Accras" min="1" value="1" style="width: 70px;">
-                    </label>
-
-                    <label class="checkbox-item" id="item-assiette">
-                        <input type="checkbox" name="Produit[]" value="Assiette complète (18$)"> 
-                        <span><strong>Assiette complète</strong> (18$)</span>
-                        <input type="number" name="Qté_Assiette" min="1" value="1" style="width: 70px;">
-                    </label>
-
-                    <label class="checkbox-item" id="item-flan">
-                        <input type="checkbox" name="Produit[]" value="Flan au coco (3 pour 10$)"> 
-                        <span><strong>Flan au coco</strong> (3 pour 10$)</span>
-                        <input type="number" name="Qté_Flan" min="1" value="1" style="width: 70px;">
-                    </label>
-
-                    <label class="checkbox-item" id="item-menu">
-                        <input type="checkbox" name="Produit[]" value="Menu complet (25$)"> 
-                        <span><strong>Menu (entrée, plat, dessert)</strong> (25$)</span>
-                        <input type="number" name="Qté_Menu" min="1" value="1" style="width: 70px;">
-                    </label>
-
                     <label class="checkbox-item" id="item-poulet">
                         <input type="checkbox" name="Produit[]" value="Poulet boucané (33$/kg)"> 
                         <span><strong>Poulet boucané congelé</strong> (33$/kg)</span>
@@ -662,7 +645,7 @@
         const modalBody = document.getElementById("modalBody");
         const closeBtn = document.querySelector(".close-btn");
 
-        // GESTION DU CLIC SUR UN PRODUIT
+        // GESTION DU CLIC SUR UN PRODUIT DE LA GRILLE
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('h3').innerText;
@@ -677,6 +660,7 @@
                     <p style="margin-bottom:20px;">Savourez notre spécialité boucanée, préparée selon la tradition antillaise pour un goût fumé inimitable.</p>
                 `;
         
+                // Si c'est un produit au kilo, on affiche le choix des poids
                 if (priceText.toLowerCase().includes("kg")) {
                     const numericPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
                     const priceHalfKg = Math.round(numericPrice / 2);
@@ -695,10 +679,11 @@
                         </div>
                     `;
                 } else {
+                    // Pour les produits du service traiteur (prix fixe) -> Redirige vers Commande Spéciale
                     modalHTML += `
                         <button onclick="selectProductAndScroll('${itemKey}', 'fixe')" class="btn btn-orange" 
                            style="display:block; text-align:center; width:100%; border:none; margin:0 auto;">
-                           Réserver maintenant
+                           Réserver (Sur commande spéciale)
                         </button>
                     `;
                 }
@@ -708,37 +693,51 @@
             });
         });
 
-        // FONCTION QUI FERME LA MODALE, DÉFILE ET PRE-SÉLECTIONNE DANS LE FORMULAIRE
+        // FONCTION OPTIMISÉE POUR GÉRER LA REDIRECTION SELON LE TYPE DE PRODUIT
         function selectProductAndScroll(itemKey, weightOption) {
-            // 1. Fermer la modale
             modalElement.style.display = "none";
 
-            // 2. Réinitialiser la couleur de fond des éléments
-            document.querySelectorAll('.checkbox-item').forEach(el => {
-                el.style.backgroundColor = 'transparent';
-            });
+            // Si le produit cliqué fait partie du service traiteur, on l'envoie direct au formulaire de Commande Spéciale
+            const traiteurItems = ['accras', 'assiette', 'flan', 'menu'];
+            
+            if (traiteurItems.includes(itemKey)) {
+                const specialForm = document.getElementById('commande-speciale');
+                if (specialForm) {
+                    specialForm.scrollIntoView({ behavior: 'smooth' });
+                    // Optionnel : Pré-remplir le champ de message avec le nom du produit sélectionné
+                    const detailsField = document.getElementById('details-spec');
+                    if (detailsField) {
+                        detailsField.value = "Je souhaite commander : " + itemKey;
+                    }
+                }
+            } else {
+                // Sinon (produits sous vide au kg), on l'envoie vers le formulaire de Commande Normale
+                document.querySelectorAll('.checkbox-item').forEach(el => el.style.backgroundColor = 'transparent');
+                
+                const targetItem = document.getElementById('item-' + itemKey);
+                if (targetItem) {
+                    const checkbox = targetItem.querySelector('input[type="checkbox"]');
+                    if (checkbox) checkbox.checked = true;
 
-            // 3. Trouver le produit correspondant
-            const targetItem = document.getElementById('item-' + itemKey);
-            if (targetItem) {
-                const checkbox = targetItem.querySelector('input[type="checkbox"]');
-                if (checkbox) checkbox.checked = true;
+                    const selectEl = targetItem.querySelector('select');
+                    if (selectEl) {
+                        if (weightOption === '0.5kg') selectEl.selectedIndex = 0;
+                        if (weightOption === '1kg') selectEl.selectedIndex = 1;
+                    }
 
-                // Ajuster le poids si c'est un produit au kilo
-                const selectEl = targetItem.querySelector('select');
-                if (selectEl && weightOption === '0.5kg') {
-                    selectEl.selectedIndex = 0;
-                } else if (selectEl && weightOption === '1kg') {
-                    selectEl.selectedIndex = 1;
+                    // Surlignage visuel pour indiquer à l'utilisateur où le produit a été coché
+                    targetItem.style.backgroundColor = '#ffe0b2';
+                    setTimeout(() => {
+                        targetItem.style.transition = 'background-color 1s ease';
+                        targetItem.style.backgroundColor = 'transparent';
+                    }, 3000);
                 }
 
-                // Surligner la ligne du produit
-                targetItem.style.backgroundColor = '#ffe0b2';
+                const normalForm = document.getElementById('commande-normale');
+                if (normalForm) {
+                    normalForm.scrollIntoView({ behavior: 'smooth' });
+                }
             }
-
-            // 4. Défiler jusqu'au formulaire
-            const formSection = document.getElementById('commande-normale');
-            formSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         // FERMETURE DE LA MODALE
