@@ -488,51 +488,70 @@
                 <label>Sélectionnez vos produits *</label>
                 <div class="product-selection-grid">
                     <label class="checkbox-item" id="item-poulet">
-                        <input type="checkbox" name="Produit[]" value="Poulet boucané (33$/kg)"> 
-                        <span><strong>Poulet boucané congelé</strong> (33$/kg)</span>
-                        <select name="Poids_Poulet">
-                            <option value="Env. 0.5kg (~17$)">Env. 0.5 kg (~17$)</option>
-                            <option value="Env. 1kg (33$)" selected>Env. 1 kg (33$)</option>
+                        <input type="checkbox" name="Produit[]" value="Poulet boucané congelé"> 
+                        <span>
+                            <strong>Poulet boucané</strong><br>
+                            <small style="color: #666;">(33 $/kg — Prix moyen : env. 17 $ / pièce)</small>
+                        </span>
+                        <select name="Nb_Pieces_Poulet" style="margin-left: auto;">
+                            <option value="1 pièce (env. 17$)">1 pièce</option>
+                            <option value="2 pièces (env. 34$)">2 pièces</option>
+                            <option value="3 pièces (env. 51$)">3 pièces</option>
                         </select>
                     </label>
-
+                    
                     <label class="checkbox-item" id="item-cuisses">
-                        <input type="checkbox" name="Produit[]" value="Cuisses/Ailes (36$/kg)"> 
-                        <span><strong>Cuisses/Ailes de poulet</strong> (36$/kg)</span>
-                        <select name="Poids_Cuisses">
-                            <option value="Env. 0.5kg (18$)">Env. 0.5 kg (18$)</option>
-                            <option value="Env. 1kg (36$)" selected>Env. 1 kg (36$)</option>
+                        <input type="checkbox" name="Produit[]" value="Cuisses/Ailes de poulet"> 
+                        <span>
+                            <strong>Cuisses / Ailes de poulet</strong><br>
+                            <small style="color: #666;">(36 $/kg — Prix moyen : env. 18 $ / paquet)</small>
+                        </span>
+                        <select name="Nb_Pieces_Cuisses" style="margin-left: auto;">
+                            <option value="1 paquet (env. 18$)">1 paquet</option>
+                            <option value="2 paquets (env. 36$)">2 paquets</option>
+                            <option value="3 paquets (env. 54$)">3 paquets</option>
                         </select>
                     </label>
-
+                    
                     <label class="checkbox-item" id="item-poitrine">
-                        <input type="checkbox" name="Produit[]" value="Poitrine de poulet (45$/kg)"> 
-                        <span><strong>Poitrine de poulet boucanée</strong> (45$/kg)</span>
-                        <select name="Poids_Poitrine">
-                            <option value="Env. 0.5kg (~23$)">Env. 0.5 kg (~23$)</option>
-                            <option value="Env. 1kg (45$)" selected>Env. 1 kg (45$)</option>
+                        <input type="checkbox" name="Produit[]" value="Poitrine de poulet boucanée"> 
+                        <span>
+                            <strong>Poitrine de poulet</strong><br>
+                            <small style="color: #666;">(45 $/kg — Prix moyen : env. 23 $ / pièce)</small>
+                        </span>
+                        <select name="Nb_Pieces_Poitrine" style="margin-left: auto;">
+                            <option value="1 pièce (env. 23$)">1 pièce</option>
+                            <option value="2 pièces (env. 46$)">2 pièces</option>
+                            <option value="3 pièces (env. 69$)">3 pièces</option>
                         </select>
                     </label>
-
+                    
                     <label class="checkbox-item" id="item-cotes">
-                        <input type="checkbox" name="Produit[]" value="Côtes levées de porc (36$/kg)"> 
-                        <span><strong>Côtes levées de porc</strong> (36$/kg)</span>
-                        <select name="Poids_Cotes">
-                            <option value="Env. 0.5kg (18$)">Env. 0.5 kg (18$)</option>
-                            <option value="Env. 1kg (36$)" selected>Env. 1 kg (36$)</option>
+                        <input type="checkbox" name="Produit[]" value="Côtes levées de porc"> 
+                        <span>
+                            <strong>Côtes levées de porc</strong><br>
+                            <small style="color: #666;">(36 $/kg — Prix moyen : env. 18 $ / rack)</small>
+                        </span>
+                        <select name="Nb_Pieces_Cotes" style="margin-left: auto;">
+                            <option value="1 rack (env. 18$)">1 rack</option>
+                            <option value="2 racks (env. 36$)">2 racks</option>
+                            <option value="3 racks (env. 54$)">3 racks</option>
                         </select>
                     </label>
-
+                    
                     <label class="checkbox-item" id="item-agneau">
-                        <input type="checkbox" name="Produit[]" value="Agneau boucané (64$/kg)"> 
-                        <span><strong>Agneau boucané</strong> (64$/kg)</span>
-                        <select name="Poids_Agneau">
-                            <option value="Env. 0.5kg (32$)">Env. 0.5 kg (32$)</option>
-                            <option value="Env. 1kg (64$)" selected>Env. 1 kg (64$)</option>
+                        <input type="checkbox" name="Produit[]" value="Agneau boucané"> 
+                        <span>
+                            <strong>Agneau boucané</strong><br>
+                            <small style="color: #666;">(64 $/kg — Prix moyen : env. 32 $ / morceau)</small>
+                        </span>
+                        <select name="Nb_Pieces_Agneau" style="margin-left: auto;">
+                            <option value="1 morceau (env. 32$)">1 morceau</option>
+                            <option value="2 morceaux (env. 64$)">2 morceaux</option>
+                            <option value="3 morceaux (env. 96$)">3 morceaux</option>
                         </select>
                     </label>
                 </div>
-            </div>
 
             <div class="form-group-row">
                 <div class="form-group">
