@@ -679,25 +679,33 @@
 
                 // Si c'est un produit au kilo (articles sous-vide)
                 if (priceText.toLowerCase().includes("kg")) {
-                    const numericPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
-                    const avgPiecePrice = Math.round(numericPrice / 2); // Prix moyen estimé (~0.5kg/pièce)
-
+                    // Dictionnaire des prix moyens fixes par pièce (modifiez les chiffres ici)
+                    const avgPrices = {
+                        'poulet': 33,    // Prix moyen pour le poulet
+                        'cuisses': 21,   // Prix moyen pour les cuisses/ailes
+                        'poitrine': 17,  // Prix moyen pour la poitrine
+                        'cotes': 28,     // Prix moyen pour les côtes levées
+                        'agneau': 75,     // Prix moyen pour l'agneau
+                            };
+                    
+                    const avgPiecePrice = avgPrices[itemKey] || 18;
+                    
                     modalHTML += `
-                        <p style="font-size:0.85rem; color:#666; margin-bottom:15px; line-height:1.4;">
-                            <em>Prix ajusté au poids exact lors de la réception (Prix moyen : environ ${avgPiecePrice} $ / pièce).</em>
-                        </p>
-                        <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir le nombre de pièces :</p>
-                        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <button onclick="selectProductAndScroll('${itemKey}', '1')" class="btn btn-orange" 
-                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
-                               Réserver 1 pièce (~${avgPiecePrice}$)
-                            </button>
-                            <button onclick="selectProductAndScroll('${itemKey}', '2')" class="btn btn-orange" 
-                               style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
-                               Réserver 2 pièces (~${avgPiecePrice * 2}$)
-                            </button>
-                        </div>
-                    `;
+                    <p style="font-size:0.85rem; color:#666; margin-bottom:15px; line-height:1.4;">
+                        <em>Prix ajusté au poids exact lors de la réception (Prix moyen : environ ${avgPiecePrice} $ / pièce).</em>
+                    </p>
+                    <p style="margin-bottom:10px; font-weight:bold; font-size:0.9rem;">Choisir le nombre de pièces :</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="selectProductAndScroll('${itemKey}', '1')" class="btn btn-orange" 
+                        style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
+                        Réserver 1 pièce (~${avgPiecePrice}$)
+                    </button>
+                    <button onclick="selectProductAndScroll('${itemKey}', '2')" class="btn btn-orange" 
+                        style="padding: 10px 15px; font-size: 0.85rem; flex: 1; min-width: 110px;">
+                        Réserver 2 pièces (~${avgPiecePrice * 2}$)
+                    </button>
+                </div>
+            `;
                 } else {
                     // Pour les produits Traiteur (prix fixe) -> Direction Commande Spéciale
                     modalHTML += `
