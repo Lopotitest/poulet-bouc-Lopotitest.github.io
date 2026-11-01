@@ -751,7 +751,7 @@
                     // Ajuster le nombre de pièces dans la liste déroulante
                     const selectEl = targetItem.querySelector('select');
                     if (selectEl) {
-                        const qtyIndex = parseInt(pieceQty) - 1;
+                        const qtyIndex = parseInt(pieceQty);
                         if (qtyIndex >= 0 && qtyIndex < selectEl.options.length) {
                             selectEl.selectedIndex = qtyIndex;
                         }
