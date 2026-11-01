@@ -792,6 +792,56 @@
         }
         window.addEventListener("scroll", reveal);
         reveal();
+
+        // GESTION AUTOMATIQUE DU COMPTEUR (0 à 1 quand on coche / 0 quand on décoche)
+        document.querySelectorAll('#commande-normale input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const parentLabel = e.target.closest('.checkbox-item');
+                if (parentLabel) {
+                    const selectEl = parentLabel.querySelector('select');
+                    const numberInput = parentLabel.querySelector('input[type="number"]');
+
+                    if (e.target.checked) {
+                        // Si la case est cochée : passe de 0 à 1
+                        if (selectEl && selectEl.selectedIndex === 0) {
+                            selectEl.selectedIndex = 1; 
+                        }
+                        if (numberInput && parseInt(numberInput.value) === 0) {
+                            numberInput.value = 1;
+                        }
+                        parentLabel.style.backgroundColor = '#fff3e0';
+                    } else {
+                        // Si la case est décochée : remet à 0
+                        if (selectEl) {
+                            selectEl.selectedIndex = 0; 
+                        }
+                        if (numberInput) {
+                            numberInput.value = 0;
+                        }
+                        parentLabel.style.backgroundColor = 'transparent';
+                    }
+                }
+            });
+        });
+
+        // EFFET INVERSE : Si l'utilisateur choisit une quantité > 0 dans le menu déroulant, coche automatiquement la case
+        document.querySelectorAll('#commande-normale select, #commande-normale input[type="number"]').forEach(inputEl => {
+            inputEl.addEventListener('change', (e) => {
+                const parentLabel = e.target.closest('.checkbox-item');
+                if (parentLabel) {
+                    const checkbox = parentLabel.querySelector('input[type="checkbox"]');
+                    const val = parseInt(e.target.value) || e.target.selectedIndex;
+                    
+                    if (val > 0) {
+                        if (checkbox) checkbox.checked = true;
+                        parentLabel.style.backgroundColor = '#fff3e0';
+                    } else {
+                        if (checkbox) checkbox.checked = false;
+                        parentLabel.style.backgroundColor = 'transparent';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
